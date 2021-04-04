@@ -1,0 +1,9 @@
+export const BASE_URL='http://localhost:3000'
+export const BASE_API_URL=BASE_URL+'/api'
+export const AUTHORS_API_URL=BASE_API_URL+'/authors'
+export const BOOKS_API_URL=BASE_API_URL+'/books'
+export const AUTHORS='/authors'
+export const BOOKS='/books'
+export const ROOT_PATH='/'
+export const BOOKS_URL=BASE_URL+BOOKS
+export const AUTHORS_URL=BASE_URL+AUTHORS

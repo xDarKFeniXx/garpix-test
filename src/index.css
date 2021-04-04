@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.layout{
+  height: 100vh;
+}
+.site-layout-content {
+  min-height: 280px;
+  height: 100%;
+  padding: 24px;
+  background: #fff;
+}
+.container-layout{
+  max-width: 1500px;
+  margin: 0 auto;
+  height: 100%;
+  /*padding: 0 15px;*/
+}
+
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
