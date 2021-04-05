@@ -23,8 +23,10 @@ export const AuthorForm:React.FC<IAuthorFormProps> = ({author, onSubmitCB}) => {
     }
     return (
         <form>
+            <div>
             <Input placeholder='First Name' value={firstName} onChange={handleChangeFirstName}/>
             <Input placeholder='Last Name' value={lastName} onChange={handleChangeLastName}/>
+            </div>
             <Button onClick={handleSubmit}>Save</Button>
         </form>
     );
