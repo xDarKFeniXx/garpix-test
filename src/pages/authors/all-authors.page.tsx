@@ -3,10 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Helmet} from "react-helmet";
 import {Button, Space, Table} from "antd";
 import {Link} from "react-router-dom";
+import {DeleteOutlined, EditOutlined, ExportOutlined} from "@ant-design/icons";
+
 import {authorsListSelector, loadingSelector} from "../../store/authors/authors.selectors";
 import {LoadingEnum} from "../../types/loading.enum";
 import {asyncAuthorsAC} from "../../store/authors/authors.reducer";
-import {DeleteOutlined, EditOutlined, ExportOutlined} from "@ant-design/icons";
+import {AUTHORS, AUTHORS_NEW_URL, authorsEditPath} from "../../utils/consts";
 
 
 export const AllAuthorsPage = () => {
@@ -40,8 +42,8 @@ export const AllAuthorsPage = () => {
         key: 'action',
         render: (text: any, record: any) => (
             <Space size="middle">
-                <Link to={`/authors/${record.id}`}><Button type='primary' icon={<ExportOutlined />}/></Link>
-                <Link to={'/authors/'+record.id+'/edit'} ><Button icon={<EditOutlined />}/></Link>
+                <Link to={`${AUTHORS}/${record.id}`}><Button type='primary' icon={<ExportOutlined />}/></Link>
+                <Link to={authorsEditPath(record.id)} ><Button icon={<EditOutlined />}/></Link>
                 <Button danger icon={<DeleteOutlined />} onClick={()=>handleDelete(record.id)} />
 
             </Space>
@@ -53,7 +55,7 @@ export const AllAuthorsPage = () => {
             <Helmet>
                 <title>Garpix Test|Authors</title>
             </Helmet>
-            <Link to='authors/new'>Create New Author</Link>
+            <Link to={AUTHORS_NEW_URL}>Create New Author</Link>
             <Table
                 dataSource={authorsList}
                 columns={columns}

@@ -8,6 +8,7 @@ import {DeleteOutlined, EditOutlined, ExportOutlined} from '@ant-design/icons';
 import {booksListSelector, loadingSelector} from "../../store/books/books.selectors";
 import {LoadingEnum} from "../../types/loading.enum";
 import {asyncBooksAC} from "../../store/books/books.reducer";
+import {BOOKS, BOOKS_NEW_URL, booksEditPath} from '../../utils/consts';
 
 
 export const AllBooksPage = () => {
@@ -50,8 +51,8 @@ export const AllBooksPage = () => {
         key: 'action',
         render: (text: any, record: any) => (
             <Space size="middle">
-                <Link to={record.link||'/books'}> <Button type='primary' icon={<ExportOutlined />}/> </Link>
-                <Link to={record.link? record.link+'/edit':'/books'} ><Button icon={<EditOutlined />}/></Link>
+                <Link to={record.link||BOOKS}> <Button type='primary' icon={<ExportOutlined />}/> </Link>
+                <Link to={booksEditPath(record.id)} ><Button icon={<EditOutlined />}/></Link>
                 <Button danger icon={<DeleteOutlined />} onClick={()=>handleDelete(record.id)} />
             </Space>
         ),
@@ -62,7 +63,7 @@ export const AllBooksPage = () => {
             <Helmet>
                 <title>Garpix Test|Books</title>
             </Helmet>
-            <Link to='/books/new'>Create New Book </Link>
+            <Link to={BOOKS_NEW_URL}>Create New Book </Link>
             <Table
                 dataSource={booksList.map(book=>({...book, created_at: new Date(book.created_at).toLocaleDateString()}))}
                 columns={columns}
