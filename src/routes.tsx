@@ -6,6 +6,8 @@ import {AllBooksPage} from './pages/books/all-books.page';
 import {AuthorPage} from "./pages/authors/author.page";
 import {AllAuthorsPage} from "./pages/authors/all-authors.page";
 import {Page404Error} from "./pages/404.page";
+import {EditBookPage} from "./pages/books/edit-book.page";
+import { NewBookPage } from './pages/books/new-book.page';
 
 export const useRoutes = () => {
     return (
@@ -13,8 +15,14 @@ export const useRoutes = () => {
             <Route exact path='/'>
                 <MainPage/>
             </Route>
+            <Route path='/books/:id/edit'>
+                <EditBookPage/>
+            </Route>
+            <Route path='/books/new'>
+                <NewBookPage/>
+            </Route>
             <Route path='/books/:id'>
-               <BookPage/>
+                <BookPage/>
             </Route>
             <Route path='/books'>
                 <AllBooksPage/>
