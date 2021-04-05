@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {PersistGate} from "redux-persist/integration/react";
-import {useRoutes} from '../../routes';
+import {useRoutes} from '../../pages/routes';
 import configureStore from '../../store/store';
 import {LayoutApp} from '../layout/layout';
 import 'antd/dist/antd.css'

@@ -1,4 +1,4 @@
-import {authors, books} from "../db";
+import {authors, books} from "./db";
 import { INormalizeBook } from "../types/book.interface";
 
 export const fetchNormalizeBooks =  (): INormalizeBook[] => {

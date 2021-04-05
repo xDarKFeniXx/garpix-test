@@ -1,15 +1,15 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import {MainPage} from "./pages/main.page";
-import {BookPage} from "./pages/books/book.page";
-import {AllBooksPage} from './pages/books/all-books.page';
-import {AuthorPage} from "./pages/authors/author.page";
-import {AllAuthorsPage} from "./pages/authors/all-authors.page";
-import {Page404Error} from "./pages/404.page";
-import {EditBookPage} from "./pages/books/edit-book.page";
-import {NewBookPage} from './pages/books/new-book.page';
-import {NewAuthorPage} from "./pages/authors/new-author.page";
-import {EditAuthorPage} from "./pages/authors/edit-author.page";
+import {MainPage} from "./main.page";
+import {BookPage} from "./books/book.page";
+import {AllBooksPage} from './books/all-books.page';
+import {AuthorPage} from "./authors/author.page";
+import {AllAuthorsPage} from "./authors/all-authors.page";
+import {Page404Error} from "./404.page";
+import {EditBookPage} from "./books/edit-book.page";
+import {NewBookPage} from './books/new-book.page';
+import {NewAuthorPage} from "./authors/new-author.page";
+import {EditAuthorPage} from "./authors/edit-author.page";
 
 export const useRoutes = () => {
     return (

@@ -5,18 +5,14 @@ import {IDeleteAC, INewAC, IUpdateAC} from "../../types/async-actions.interface"
 import {IBookDTO, INormalizeBook} from "../../types/book.interface";
 import {authorsListSelector} from "../authors/authors.selectors";
 import {IAuthor} from "../../types/author.interface";
+import { safe } from "../../utils/safe.saga";
 
 function* fetchBooks() {
-    yield put(booksAC.setLoadingAC())
-    try {
+
         const books:INormalizeBook[] = yield call(fetchNormalizeBooks)
         yield delay(2000)
         yield put(booksAC.setDataAC(books))
-    } catch (e) {
-        yield put(booksAC.setErrorAC(e.message))
-    } finally {
-        yield put(booksAC.setLoadedAC())
-    }
+
 }
 function* deleteBook(action:IDeleteAC<typeof ASYNC_DELETE_BOOK>) {
     yield put(booksAC.setLoadingAC())
@@ -29,8 +25,7 @@ function* deleteBook(action:IDeleteAC<typeof ASYNC_DELETE_BOOK>) {
     }
 }
 function* addNewBook(action:INewAC<typeof ASYNC_ADD_NEW_BOOK, IBookDTO>){
-    yield put(booksAC.setLoadingAC())
-    try {
+
         const created_at=new Date()
         const authors:IAuthor[]=yield select(authorsListSelector)
         const author=authors.find(author=>author.id===action.payload.author_id)
@@ -42,25 +37,25 @@ function* addNewBook(action:INewAC<typeof ASYNC_ADD_NEW_BOOK, IBookDTO>){
         } else {
             throw new Error('Не верный автор книги')
         }
-    } catch (e) {
-        yield put(booksAC.setErrorAC(e.message))
-    } finally {
-        yield put(booksAC.setLoadedAC())
-    }
+
 }
 function* updateBook(action:IUpdateAC<typeof ASYNC_UPDATE_BOOK, INormalizeBook>){
-    yield put(booksAC.setLoadingAC())
-    try {
+
         yield put(booksAC.updateBookAC(action.payload))
-    } catch (e) {
-        yield put(booksAC.setErrorAC(e.message))
-    } finally {
-        yield put(booksAC.setLoadedAC())
-    }
+
 }
 export function* booksSaga() {
-    yield takeLatest(FETCH_DATA, fetchBooks)
-    yield takeEvery(ASYNC_DELETE_BOOK, deleteBook)
-    yield takeEvery(ASYNC_ADD_NEW_BOOK, addNewBook)
-    yield takeEvery(ASYNC_UPDATE_BOOK, updateBook)
+    yield takeLatest(FETCH_DATA, safe(startCB, onError, finallyCB, fetchBooks))
+    yield takeEvery(ASYNC_DELETE_BOOK, safe(startCB, onError, finallyCB, deleteBook))
+    yield takeEvery(ASYNC_ADD_NEW_BOOK, safe(startCB, onError, finallyCB, addNewBook))
+    yield takeEvery(ASYNC_UPDATE_BOOK, safe(startCB, onError, finallyCB, updateBook))
+}
+function* onError(e:Error){
+    yield put(booksAC.setErrorAC(e.message))
+}
+function* finallyCB(){
+    yield put(booksAC.setLoadedAC())
+}
+function* startCB(){
+    yield put(booksAC.setLoadingAC())
 }
