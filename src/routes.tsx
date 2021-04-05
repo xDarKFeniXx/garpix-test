@@ -7,7 +7,9 @@ import {AuthorPage} from "./pages/authors/author.page";
 import {AllAuthorsPage} from "./pages/authors/all-authors.page";
 import {Page404Error} from "./pages/404.page";
 import {EditBookPage} from "./pages/books/edit-book.page";
-import { NewBookPage } from './pages/books/new-book.page';
+import {NewBookPage} from './pages/books/new-book.page';
+import {NewAuthorPage} from "./pages/authors/new-author.page";
+import {EditAuthorPage} from "./pages/authors/edit-author.page";
 
 export const useRoutes = () => {
     return (
@@ -26,6 +28,12 @@ export const useRoutes = () => {
             </Route>
             <Route path='/books'>
                 <AllBooksPage/>
+            </Route>
+            <Route path='/authors/:id/edit'>
+                <EditAuthorPage/>
+            </Route>
+            <Route path='/authors/new'>
+                <NewAuthorPage/>
             </Route>
             <Route path='/authors/:id'>
                 <AuthorPage/>
